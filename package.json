@@ -1,0 +1,29 @@
+{
+    "name": "asparagus",
+    "version": "0.0.1",
+    "description": "Flexible template compiler",
+    "keywords": [ "jade", "template", "node", "build", "tool", "gulp", "compile" ],
+    "author": "Joseph Chapman",
+    "email": "joe@creatify.com",
+    "license": "MIT",
+    "scripts": {
+        "unit": "node ./node_modules/mocha/bin/mocha test/",
+        "lint": "node ./node_modules/jshint/bin/jshint ./",
+        "jscs": "node ./node_modules/jscs/bin/jscs ./",
+        "test": "npm run lint && npm run jscs && npm run unit"
+    },
+    "dependencies": {
+        "jade": "1.5.0",
+        "node-fs": "0.1.7"
+    },
+    "devDependencies": {
+        "jshint": "2.5.5",
+        "jscs": "1.6.1",
+        "mocha": "1.21.4",
+        "chai": "1.9.1",
+        "chai-as-promised": "4.1.1",
+        "sinon": "1.10.3",
+        "sinon-chai": "2.5.0",
+        "express": "4.9.0"
+    }
+}
