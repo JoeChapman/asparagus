@@ -1,7 +1,7 @@
 'use strict';
 
-var Promise = require('bluebird'),
-    fs = Promise.promisifyAll(require('fs')),
+var _Promise = require('bluebird'),
+    fs = _Promise.promisifyAll(require('fs')),
     pathUtil = require('path'),
     join = pathUtil.join,
     Compiler = require('./lib/compiler');
@@ -46,7 +46,7 @@ module.exports = function asparagus(src, options) {
     }
 
     function promise(filename) {
-        return new Promise(function (resolve) {
+        return new _Promise(function (resolve) {
             if (Object.keys(sources).length >= 2) {
                 return Object.keys(sources).map(function (id) {
                     if (sources[id].search(filename) === -1) {

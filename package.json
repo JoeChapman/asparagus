@@ -1,11 +1,22 @@
 {
     "name": "asparagus",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Flexible template compiler",
-    "keywords": [ "jade", "template", "node", "build", "tool", "gulp", "compile" ],
+    "keywords": [
+        "jade",
+        "template",
+        "node",
+        "build",
+        "tool",
+        "gulp",
+        "compile"
+    ],
     "author": "Joseph Chapman",
     "email": "joe@creatify.com",
     "license": "MIT",
+    "bin": {
+        "asparagus": "bin/asparagus"
+    },
     "scripts": {
         "unit": "node ./node_modules/mocha/bin/mocha test/",
         "lint": "node ./node_modules/jshint/bin/jshint ./",

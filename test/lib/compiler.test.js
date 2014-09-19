@@ -112,9 +112,9 @@ describe('lib/compiler', sandbox(function () {
                 };
 
                 compiler = Compiler.create({
-                        jsPath: '/javascript/path',
-                        tmplPath: '/template/path'
-                    }, options);
+                    jsPath: '/javascript/path',
+                    tmplPath: '/template/path'
+                }, options);
             });
 
             it('overrides default own properties', function () {
@@ -136,11 +136,11 @@ describe('lib/compiler', sandbox(function () {
             it('uses default format \'underscore\' if the optional format is unsupported', function () {
 
                 compiler = Compiler.create({
-                        jsPath: '/javascript/path',
-                        tmplPath: '/template/path'
-                    }, {
-                        format: 'unsupported'
-                    });
+                    jsPath: '/javascript/path',
+                    tmplPath: '/template/path'
+                }, {
+                    format: 'unsupported'
+                });
 
                 compiler.format
                     .should.equal('underscore');

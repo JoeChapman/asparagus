@@ -1,0 +1,17 @@
+#! /usr/bin/env node
+
+var asparagus = require('../'),
+    userArgs = process.argv.slice(2),
+    src = userArgs[0],
+    options = {};
+
+userArgs.slice(1).forEach(function (option) {
+    var id = option.split('=')[0],
+        val = option.split('=')[1];
+
+    options[id] = val;
+});
+
+asparagus(src, options);
+
+
