@@ -3,7 +3,7 @@ asparagus
 
 *Template compiling build tool for NodeJS*
 
-Plays nice with Gulp or runs from the command line
+Plays nice with Gulp
 
 ### Install globally
 
@@ -20,7 +20,7 @@ $ asparagus '/path/to/source/folder'
 
 ### Explained
 
-The following 2 examples will compile all and only, the files in the folder named 'includes' within the path; `__dirname + 'views/source'`.
+The following example will compile all and only, the files in the folder named 'includes' within the path; `__dirname + 'views/source'`.
 
 The compiled functions will be assigned to a hash called 'partials' and attached to the `window` object.
 
@@ -71,17 +71,10 @@ var asparagus = require('aspargus');
 asparagus(__dirname + '/views', {
     dest: __dirname + '/public/templates',
     format: 'camelcase',
-    namespace: 'partials(.views[1])',
+    namespace: 'partials',
     basedir: __dirname + '/views/dev',
     exclusive: 'includes'
 });
-
-```
-
-#### Command line
-
-```
-$ asparagus '/views' --dest '/public/templates' --format 'camelcase' --namespace 'partials' --basedir '/views/dev' --exclusive 'includes'
 
 ```
 
