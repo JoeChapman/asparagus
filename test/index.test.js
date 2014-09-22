@@ -27,8 +27,8 @@ describe('asparagus', sandbox(function () {
             .then(function () {
 
                 Compiler.create.getCall(0).should.have.been.calledWith({
-                    jsPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/t1.js',
-                    tmplPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/t1.jade'
+                    jsPath: __dirname + '/dummySource/t1.js',
+                    tmplPath: __dirname + '/dummySource/t1.jade'
                 }, {});
 
                 compiler.compile.should.have.been.called;
@@ -44,8 +44,8 @@ describe('asparagus', sandbox(function () {
             .then(function () {
 
                 Compiler.create.getCall(0).should.have.been.calledWith({
-                    jsPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/d2/sub/subtfile2.js',
-                    tmplPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/d2/sub/subtfile2.jade'
+                    jsPath: __dirname + '/dummySource/d2/sub/subtfile2.js',
+                    tmplPath: __dirname + '/dummySource/d2/sub/subtfile2.jade'
                 }, {});
 
                 compiler.compile.should.have.been.called;
@@ -61,33 +61,33 @@ describe('asparagus', sandbox(function () {
             .then(function () {
 
                 Compiler.create.getCall(0).should.have.been.calledWith({
-                    jsPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/t1.js',
-                    tmplPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/t1.jade'
+                    jsPath: __dirname + '/dummySource/t1.js',
+                    tmplPath: __dirname + '/dummySource/t1.jade'
                 }, {});
 
                 Compiler.create.getCall(1).should.have.been.calledWith({
-                    jsPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/t2.js',
-                    tmplPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/t2.jade'
+                    jsPath: __dirname + '/dummySource/t2.js',
+                    tmplPath: __dirname + '/dummySource/t2.jade'
                 }, {});
 
                 Compiler.create.getCall(2).should.have.been.calledWith({
-                    jsPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/d1/d1.js',
-                    tmplPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/d1/d1.jade',
+                    jsPath: __dirname + '/dummySource/d1/d1.js',
+                    tmplPath: __dirname + '/dummySource/d1/d1.jade',
                 }, {});
 
                 Compiler.create.getCall(3).should.have.been.calledWith({
-                    jsPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/d2/d2.js',
-                    tmplPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/d2/d2.jade'
+                    jsPath: __dirname + '/dummySource/d2/d2.js',
+                    tmplPath: __dirname + '/dummySource/d2/d2.jade'
                 }, {});
 
                 Compiler.create.getCall(4).should.have.been.calledWith({
-                    jsPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/d1/sub/subtfile1.js',
-                    tmplPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/d1/sub/subtfile1.jade',
+                    jsPath: __dirname + '/dummySource/d1/sub/subtfile1.js',
+                    tmplPath: __dirname + '/dummySource/d1/sub/subtfile1.jade',
                 }, {});
 
                 Compiler.create.getCall(5).should.have.been.calledWith({
-                    jsPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/d2/sub/subtfile2.js',
-                    tmplPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/d2/sub/subtfile2.jade'
+                    jsPath: __dirname + '/dummySource/d2/sub/subtfile2.js',
+                    tmplPath: __dirname + '/dummySource/d2/sub/subtfile2.jade'
                 }, {});
 
                 compiler.compile.should.have.been.called;
@@ -104,13 +104,13 @@ describe('asparagus', sandbox(function () {
             .then(function () {
 
                 Compiler.create.getCall(0).should.have.been.calledWith({
-                    jsPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/d1/sub/subtfile1.js',
-                    tmplPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/d1/sub/subtfile1.jade',
+                    jsPath: __dirname + '/dummySource/d1/sub/subtfile1.js',
+                    tmplPath: __dirname + '/dummySource/d1/sub/subtfile1.jade',
                 }, { exclusive: 'sub' });
 
                 Compiler.create.getCall(1).should.have.been.calledWith({
-                    jsPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/d2/sub/subtfile2.js',
-                    tmplPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/d2/sub/subtfile2.jade'
+                    jsPath: __dirname + '/dummySource/d2/sub/subtfile2.js',
+                    tmplPath: __dirname + '/dummySource/d2/sub/subtfile2.jade'
                 }, { exclusive: 'sub' });
 
                 compiler.compile.should.have.been.called;

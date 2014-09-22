@@ -1,6 +1,6 @@
 {
     "name": "asparagus",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Flexible template compiler. Compile all or some of your templates, even those in parallel sub-folders, to a location that may or may not yet exist.",
     "keywords": [
         "jade",
