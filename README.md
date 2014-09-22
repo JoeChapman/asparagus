@@ -1,6 +1,8 @@
 asparagus
 =========
 
+Prefer your veg in some colour? [asparagus pages](http://joechapman.github.io/asparagus/)
+
 Template compile tool for NodeJS.
 Compile all or some of your templates, even those in parallel sub-folders, to a location that may or may not yet exist.
 
@@ -60,7 +62,6 @@ window.partials = {
     functionName: function () { ..... }
 };
 ```
-
 
 ### Options
 ```

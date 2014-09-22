@@ -1,7 +1,7 @@
 {
     "name": "asparagus",
     "version": "0.0.2",
-    "description": "Flexible template compiler",
+    "description": "Flexible template compiler. Compile all or some of your templates, even those in parallel sub-folders, to a location that may or may not yet exist.",
     "keywords": [
         "jade",
         "template",
@@ -11,8 +11,20 @@
         "gulp",
         "compile"
     ],
-    "author": "Joseph Chapman",
-    "email": "joe@creatify.com",
+    "author": {
+        "name": "Joseph Chapman",
+        "email": "joe@creatify-limited.com",
+        "url": "http://creatify-limited.com"
+    },
+    "readmeFilename": "http://joechapman.github.io/asparagus/",
+    "homepage": "http://joechapman.github.io/asparagus/",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/JoeChapman/asparagus"
+    },
+    "bugs": {
+        "url": "https://github.com/JoeChapman/asparagus/issues"
+    },
     "license": "MIT",
     "bin": {
         "asparagus": "bin/asparagus"
@@ -35,6 +47,7 @@
         "chai-as-promised": "4.1.1",
         "sinon": "1.10.3",
         "sinon-chai": "2.5.0",
-        "express": "4.9.0"
+        "express": "4.9.0",
+        "bluebird": "1.3.2"
     }
 }
