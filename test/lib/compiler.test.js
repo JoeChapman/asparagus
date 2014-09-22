@@ -154,8 +154,8 @@ describe('lib/compiler', sandbox(function () {
     describe('.compile()', function () {
 
         var paths = {
-            jsPath: '/Users/josephchapman/Projects/asparagus/test/dummyDestination/t1.js',
-            tmplPath: '/Users/josephchapman/Projects/asparagus/test/dummySource/t1.jade'
+            jsPath: __dirname + '/../dummyDestination/t1.js',
+            tmplPath: __dirname + '/../dummySource/t1.jade'
         };
 
         beforeEach(function () {
