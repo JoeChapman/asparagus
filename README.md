@@ -33,7 +33,7 @@ asparagus(__dirname + '/views', {
     namespace: 'partials',
     basedir: __dirname + '/views/dev',
     exclusive: 'includes'
-
+});
 ```
 
 **Plays nice with Gulp too** simply wrap the above in a gulp task, I.e.,
