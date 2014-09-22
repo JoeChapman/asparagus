@@ -4,6 +4,9 @@ asparagus
 Template compile tool for NodeJS.
 Compile all or some of your templates, even those in parallel sub-folders, to a location that may or may not yet exist.
 
+[![Build Status](https://travis-ci.org/JoeChapman/asparagus.svg?branch=master)](https://travis-ci.org/JoeChapman/asparagus)
+[![NPM version](https://badge.fury.io/js/asparagus.svg)](http://badge.fury.io/js/asparagus)
+
 ### Install globally to use the binary commmands
 
 ```
