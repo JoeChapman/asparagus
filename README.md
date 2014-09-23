@@ -25,7 +25,7 @@ $ asparagus /path/to/source/folder namespace=mytemplates format=camelcase
 
 #### JavaScript
 ```
-var asparagus = require('aspargus');
+var asparagus = require('asparagus');
 
 // A source parameter is required as the first argument to asparagus
 

@@ -4,7 +4,7 @@ var _Promise = require('bluebird'),
     fs = _Promise.promisifyAll(require('fs')),
     pathUtil = require('path'),
     join = pathUtil.join,
-    Compiler = require('./lib/compiler');
+    Pecan = require('pecan');
 
 module.exports = function asparagus(src, options) {
 
@@ -18,7 +18,6 @@ module.exports = function asparagus(src, options) {
     }
 
     var dest = options.dest || src,
-        // strip filename from base directory path
         sources = {},
         destinations = {};
 
@@ -72,7 +71,7 @@ module.exports = function asparagus(src, options) {
 function compileFile(err, attrs, options) {
     if (!err || (err && err.cause && err.cause.code === 'ENOTDIR')) {
         if (!options.exclusive || (options.exclusive && attrs.src.indexOf(options.exclusive) !== -1)) {
-            Compiler.create(getPaths(attrs.src, attrs.dest, attrs.filename), options).compile();
+            Pecan.create(getPaths(attrs.src, attrs.dest, attrs.filename), options).compile();
         }
     } else {
         throw new Error(err);
