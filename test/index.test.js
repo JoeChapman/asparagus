@@ -1,14 +1,14 @@
 'use strict';
 
 var asparagus = require('../'),
-    Compiler = require('../lib/compiler');
+    Pecan = require('pecan');
 
 describe('asparagus', sandbox(function () {
 
     var compiler;
 
     beforeEach(function () {
-        sandbox.stub(Compiler, 'create', function () {
+        sandbox.stub(Pecan, 'create', function () {
             compiler = { compile: sandbox.stub() };
             return compiler;
         });
@@ -26,7 +26,7 @@ describe('asparagus', sandbox(function () {
         return asparagus(__dirname + '/dummySource/t1.jade')
             .then(function () {
 
-                Compiler.create.getCall(0).should.have.been.calledWith({
+                Pecan.create.getCall(0).should.have.been.calledWith({
                     jsPath: __dirname + '/dummySource/t1.js',
                     tmplPath: __dirname + '/dummySource/t1.jade'
                 }, {});
@@ -43,7 +43,7 @@ describe('asparagus', sandbox(function () {
         return asparagus(__dirname + '/dummySource/d2/sub/subtfile2.jade')
             .then(function () {
 
-                Compiler.create.getCall(0).should.have.been.calledWith({
+                Pecan.create.getCall(0).should.have.been.calledWith({
                     jsPath: __dirname + '/dummySource/d2/sub/subtfile2.js',
                     tmplPath: __dirname + '/dummySource/d2/sub/subtfile2.jade'
                 }, {});
@@ -60,32 +60,32 @@ describe('asparagus', sandbox(function () {
         return asparagus(__dirname + '/dummySource/')
             .then(function () {
 
-                Compiler.create.getCall(0).should.have.been.calledWith({
+                Pecan.create.getCall(0).should.have.been.calledWith({
                     jsPath: __dirname + '/dummySource/t1.js',
                     tmplPath: __dirname + '/dummySource/t1.jade'
                 }, {});
 
-                Compiler.create.getCall(1).should.have.been.calledWith({
+                Pecan.create.getCall(1).should.have.been.calledWith({
                     jsPath: __dirname + '/dummySource/t2.js',
                     tmplPath: __dirname + '/dummySource/t2.jade'
                 }, {});
 
-                Compiler.create.getCall(2).should.have.been.calledWith({
+                Pecan.create.getCall(2).should.have.been.calledWith({
                     jsPath: __dirname + '/dummySource/d1/d1.js',
                     tmplPath: __dirname + '/dummySource/d1/d1.jade',
                 }, {});
 
-                Compiler.create.getCall(3).should.have.been.calledWith({
+                Pecan.create.getCall(3).should.have.been.calledWith({
                     jsPath: __dirname + '/dummySource/d2/d2.js',
                     tmplPath: __dirname + '/dummySource/d2/d2.jade'
                 }, {});
 
-                Compiler.create.getCall(4).should.have.been.calledWith({
+                Pecan.create.getCall(4).should.have.been.calledWith({
                     jsPath: __dirname + '/dummySource/d1/sub/subtfile1.js',
                     tmplPath: __dirname + '/dummySource/d1/sub/subtfile1.jade',
                 }, {});
 
-                Compiler.create.getCall(5).should.have.been.calledWith({
+                Pecan.create.getCall(5).should.have.been.calledWith({
                     jsPath: __dirname + '/dummySource/d2/sub/subtfile2.js',
                     tmplPath: __dirname + '/dummySource/d2/sub/subtfile2.jade'
                 }, {});
@@ -103,12 +103,12 @@ describe('asparagus', sandbox(function () {
         return asparagus(__dirname + '/dummySource/', { exclusive: 'sub' })
             .then(function () {
 
-                Compiler.create.getCall(0).should.have.been.calledWith({
+                Pecan.create.getCall(0).should.have.been.calledWith({
                     jsPath: __dirname + '/dummySource/d1/sub/subtfile1.js',
                     tmplPath: __dirname + '/dummySource/d1/sub/subtfile1.jade',
                 }, { exclusive: 'sub' });
 
-                Compiler.create.getCall(1).should.have.been.calledWith({
+                Pecan.create.getCall(1).should.have.been.calledWith({
                     jsPath: __dirname + '/dummySource/d2/sub/subtfile2.js',
                     tmplPath: __dirname + '/dummySource/d2/sub/subtfile2.jade'
                 }, { exclusive: 'sub' });
