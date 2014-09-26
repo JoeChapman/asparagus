@@ -1,7 +1,7 @@
 'use strict';
 
-var _Promise = require('bluebird'),
-    fs = _Promise.promisifyAll(require('fs')),
+var Bluebird = require('bluebird'),
+    fs = Bluebird.promisifyAll(require('fs')),
     pathUtil = require('path'),
     join = pathUtil.join,
     Pecan = require('pecan');
@@ -25,7 +25,7 @@ module.exports = function asparagus(src, options) {
         return findFiles(src)
             .map(function (filename) {
                 if (isDirectory(filename)) {
-                    return promise(filename);
+                    return resolveWith(filename);
                 } else {
                     // if a file, compile it and return the compiler
                     return compileFile(null, {
@@ -44,8 +44,8 @@ module.exports = function asparagus(src, options) {
             });
     }
 
-    function promise(filename) {
-        return new _Promise(function (resolve) {
+    function resolveWith(filename) {
+        return new Bluebird(function (resolve) {
             if (Object.keys(sources).length >= 2) {
                 return Object.keys(sources).map(function (id) {
                     if (sources[id].search(filename) === -1) {
