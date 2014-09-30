@@ -34,5 +34,5 @@
     "requireLineFeedAtFileEnd"                 : true,
     "maximumLineLength"                        : 120,
     "validateJSDoc"                            : {},
-    "excludeFiles"                             : ["node_modules/**", "**/*.conf.*", "public/templates/**", "public/js/**"]
+    "excludeFiles"                             : ["node_modules/**", "**/*.conf.*", "public/templates/**", "public/js/**", ".git/*"]
 }

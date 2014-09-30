@@ -30,6 +30,7 @@
         "asparagus": "bin/asparagus"
     },
     "scripts": {
+        "hooks": "chmod +x hooks/*; cd .git/hooks && ln -sf ../../hooks/* .",
         "unit": "node ./node_modules/mocha/bin/mocha test/",
         "lint": "node ./node_modules/jshint/bin/jshint ./",
         "jscs": "node ./node_modules/jscs/bin/jscs ./",
