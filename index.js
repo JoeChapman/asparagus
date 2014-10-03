@@ -7,7 +7,6 @@ var Bluebird = require('bluebird'),
     Pecan = require('pecan');
 
 module.exports = function asparagus(src, options) {
-
     // default options
     options = options || {};
     src = src || options.src;
@@ -17,15 +16,13 @@ module.exports = function asparagus(src, options) {
         throw new Error('First argument must be the source path');
     }
 
-    var dest = options.dest || src,
-        sources = {},
-        destinations = {};
+    var dest = options.dest || src;
 
     function getFiles(src, dest) {
         return findFiles(src)
             .map(function (filename) {
-                if (isDirectory(filename)) {
-                    return resolveWith(filename);
+                if (isDirname(filename)) {
+                    return resolveWith(filename, src, dest);
                 } else {
                     // if a file, compile it and return the compiler
                     return compileFile(null, {
@@ -44,23 +41,9 @@ module.exports = function asparagus(src, options) {
             });
     }
 
-    function resolveWith(filename) {
+    function resolveWith(dirname, src, dest) {
         return new Bluebird(function (resolve) {
-            if (Object.keys(sources).length >= 2) {
-                return Object.keys(sources).map(function (id) {
-                    if (sources[id].search(filename) === -1) {
-                        destinations[id] = join(destinations[id], filename);
-                        sources[id] = join(sources[id], filename);
-                    }
-                    return resolve(getFiles(sources[id], destinations[id]));
-                });
-            } else {
-                if (!sources[filename]) {
-                    destinations[filename] = join(dest, filename);
-                    sources[filename] = join(src, filename);
-                }
-                return resolve(getFiles(sources[filename], destinations[filename]));
-            }
+            return resolve(getFiles(pathUtil.join(src, dirname), pathUtil.join(dest, dirname)));
         });
     }
 
@@ -69,26 +52,28 @@ module.exports = function asparagus(src, options) {
 };
 
 function compileFile(err, attrs, options) {
+    // If there is no error or the error was 'Not a directory'
     if (!err || (err && err.cause && err.cause.code === 'ENOTDIR')) {
-        if (!options.exclusive || (options.exclusive && attrs.src.indexOf(options.exclusive) !== -1)) {
+        // If there is no exclusive option or this path is not excluded
+        if (!options.exclusive || (options.exclusive && attrs.src.split('/').indexOf(options.exclusive) !== -1)) {
             Pecan.create(getPaths(attrs.src, attrs.dest, attrs.filename), options).compile();
         }
-    } else {
+    } else if (err && err.cause && err.cause.code !== 'ENOENT' && !isDirname(attrs.filename)) {
         throw new Error(err);
     }
 }
 
 function getPaths(src, dest, filename) {
     // if the src/dest paths include the filenames (ext)
-    src = isDirectory(src) ? src : pathUtil.dirname(src);
-    dest = isDirectory(dest) ? dest : pathUtil.dirname(dest);
+    src = isDirname(src) ? src : pathUtil.dirname(src);
+    dest = isDirname(dest) ? dest : pathUtil.dirname(dest);
     return {
         jsPath: join(dest, filename.replace(pathUtil.extname(filename), '.js')),
         tmplPath: join(src, filename)
     };
 }
 
-function isDirectory(node) {
+function isDirname(node) {
     return Boolean(pathUtil.extname(node)) === false;
 }
 
