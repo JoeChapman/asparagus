@@ -3,7 +3,6 @@
 var Bluebird = require('bluebird'),
     fs = Bluebird.promisifyAll(require('fs')),
     pathUtil = require('path'),
-    join = pathUtil.join,
     Pecan = require('pecan');
 
 module.exports = function asparagus(src, options) {
@@ -52,13 +51,14 @@ module.exports = function asparagus(src, options) {
 };
 
 function compileFile(err, attrs, options) {
+    var errCode = err && err.cause && err.cause.code;
     // If there is no error or the error was 'Not a directory'
-    if (!err || (err && err.cause && err.cause.code === 'ENOTDIR')) {
+    if (!err || (errCode === 'ENOTDIR')) {
         // If there is no exclusive option or this path is not excluded
-        if (!options.exclusive || (options.exclusive && attrs.src.split('/').indexOf(options.exclusive) !== -1)) {
+        if (!options.exclusive || isExclusive(attrs, options)) {
             Pecan.create(getPaths(attrs.src, attrs.dest, attrs.filename), options).compile();
         }
-    } else if (err && err.cause && err.cause.code !== 'ENOENT' && !isDirname(attrs.filename)) {
+    } else if (errCode !== 'ENOENT' && !isDirname(attrs.filename)) {
         throw new Error(err);
     }
 }
@@ -68,9 +68,13 @@ function getPaths(src, dest, filename) {
     src = isDirname(src) ? src : pathUtil.dirname(src);
     dest = isDirname(dest) ? dest : pathUtil.dirname(dest);
     return {
-        jsPath: join(dest, filename.replace(pathUtil.extname(filename), '.js')),
-        tmplPath: join(src, filename)
+        jsPath: pathUtil.join(dest, filename.replace(pathUtil.extname(filename), '.js')),
+        tmplPath: pathUtil.join(src, filename)
     };
+}
+
+function isExclusive(attrs, options) {
+    return Boolean(options.exclusive && attrs.src.split(pathUtil.sep).indexOf(options.exclusive) !== -1);
 }
 
 function isDirname(node) {
