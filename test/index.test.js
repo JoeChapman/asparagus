@@ -1,7 +1,8 @@
 'use strict';
 
 var asparagus = require('../'),
-    Pecan = require('pecan');
+    Pecan = require('pecan'),
+    EventEmitter = require('events').EventEmitter;
 
 describe('asparagus', sandbox(function () {
 
@@ -23,16 +24,50 @@ describe('asparagus', sandbox(function () {
 
     it('compiles a top-level file', function (done) {
 
+        Pecan.queue[__dirname + '/dummy-source/t1.jade'] = {
+            on: sandbox.stub()
+        };
+
         return asparagus(__dirname + '/dummy-source/t1.jade')
             .then(function () {
 
-                Pecan.create.should.have.been.calledWith({
-                    jsPath: __dirname + '/dummy-source/t1.js',
-                    tmplPath: __dirname + '/dummy-source/t1.jade'
-                }, {});
+                Pecan.create
+                    .should.have.been.calledWith({
+                        jsPath: __dirname + '/dummy-source/t1.js',
+                        tmplPath: __dirname + '/dummy-source/t1.jade'
+                    }, {});
 
-                Pecan.create.callCount.should.equal(1);
-                compiler.compile.should.have.been.called;
+                Pecan.create.callCount
+                    .should.equal(1);
+
+                compiler.compile
+                    .should.have.been.called;
+
+                done();
+            });
+
+    });
+
+    it('calls options.onEnd when finished compiling all files', function (done) {
+
+        var onEndSpy = sandbox.spy();
+        Pecan.queue[__dirname + '/dummy-source/t1.jade'] = new EventEmitter();
+
+        return asparagus(__dirname + '/dummy-source/t1.jade', { onEnd: onEndSpy })
+            .then(function () {
+
+                Pecan.create
+                    .should.have.been.calledWith({
+                        jsPath: __dirname + '/dummy-source/t1.js',
+                        tmplPath: __dirname + '/dummy-source/t1.jade'
+                    }, { onEnd: onEndSpy });
+
+                var queueItem = Pecan.queue[__dirname + '/dummy-source/t1.jade'];
+                delete Pecan.queue[__dirname + '/dummy-source/t1.jade'];
+                queueItem.emit('end');
+
+                onEndSpy
+                    .should.have.been.called;
 
                 done();
             });
@@ -40,6 +75,10 @@ describe('asparagus', sandbox(function () {
     });
 
     it('compiles a file 3 steps down', function (done) {
+
+        Pecan.queue[__dirname + '/dummy-source/d2/sub/sub-file-2.jade'] = {
+            on: sandbox.stub()
+        };
 
         return asparagus(__dirname + '/dummy-source/d2/sub/sub-file-2.jade')
             .then(function () {
@@ -58,6 +97,37 @@ describe('asparagus', sandbox(function () {
     });
 
     it('compiles files and files within parallel folders', function (done) {
+
+        Pecan.queue[__dirname + '/dummy-source/t1.jade'] = {
+            on: sandbox.stub()
+        };
+        Pecan.queue[__dirname + '/dummy-source/t2.jade'] = {
+            on: sandbox.stub()
+        };
+        Pecan.queue[__dirname + '/dummy-source/d1/d1.jade'] = {
+            on: sandbox.stub()
+        };
+        Pecan.queue[__dirname + '/dummy-source/d2/d2.jade'] = {
+            on: sandbox.stub()
+        };
+        Pecan.queue[__dirname + '/dummy-source/exp/exp-sub.jade'] = {
+            on: sandbox.stub()
+        };
+        Pecan.queue[__dirname + '/dummy-source/d1/d1-sub/d1-sub-file.jade'] = {
+            on: sandbox.stub()
+        };
+        Pecan.queue[__dirname + '/dummy-source/d1/sub/sub-file-1.jade'] = {
+            on: sandbox.stub()
+        };
+        Pecan.queue[__dirname + '/dummy-source/d1/d1-sub/d1-sub-file.jade'] = {
+            on: sandbox.stub()
+        };
+        Pecan.queue[__dirname + '/dummy-source/d1/sub/sub-file-1.jade'] = {
+            on: sandbox.stub()
+        };
+        Pecan.queue[__dirname + '/dummy-source/d2/sub/sub-file-2.jade'] = {
+            on: sandbox.stub()
+        };
 
         return asparagus(__dirname + '/dummy-source/')
             .then(function () {

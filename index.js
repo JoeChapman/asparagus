@@ -51,12 +51,22 @@ module.exports = function asparagus(src, options) {
 };
 
 function compileFile(err, attrs, options) {
-    var errCode = err && err.cause && err.cause.code;
+    var errCode = err && err.cause && err.cause.code,
+        paths;
     // If there is no error or the error was 'Not a directory'
     if (!err || (errCode === 'ENOTDIR')) {
         // If there is no exclusive option or this path is not excluded
         if (!options.exclusive || isExclusive(attrs, options)) {
-            Pecan.create(getPaths(attrs.src, attrs.dest, attrs.filename), options).compile();
+            paths = getPaths(attrs.src, attrs.dest, attrs.filename);
+            // compile
+            Pecan.create(paths, options).compile();
+            // listen to the `end` event
+            Pecan.queue[paths.tmplPath].on('end', function () {
+                // Call the optional cb if no more to compile
+                if (typeof options.onEnd === 'function' && Object.keys(Pecan.queue).length === 0) {
+                    options.onEnd(paths);
+                }
+            });
         }
     } else if (errCode !== 'ENOENT' && !isDirname(attrs.filename)) {
         throw new Error(err);

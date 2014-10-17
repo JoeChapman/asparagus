@@ -1,6 +1,6 @@
 {
     "name": "asparagus",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "description": "Flexible template compiler. Compile all or some of your templates, even those in parallel sub-folders, to a location that may or may not yet exist.",
     "keywords": [
         "jade",
@@ -9,6 +9,7 @@
         "build",
         "tool",
         "gulp",
+        "pecan",
         "compile"
     ],
     "preferGlobal": true,
@@ -38,7 +39,7 @@
         "test": "npm run lint && npm run jscs && npm run unit"
     },
     "dependencies": {
-        "pecan": "0.0.1",
+        "pecan": "0.0.2",
         "bluebird": "2.3.2"
     },
     "devDependencies": {
