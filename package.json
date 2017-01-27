@@ -1,54 +1,58 @@
 {
-    "name": "asparagus",
-    "version": "0.2.1",
-    "description": "Flexible template compiler. Compile all or some of your templates, even those in parallel sub-folders, to a location that may or may not yet exist.",
-    "keywords": [
-        "jade",
-        "template",
-        "node",
-        "build",
-        "tool",
-        "gulp",
-        "pecan",
-        "compile"
-    ],
-    "preferGlobal": true,
-    "author": {
-        "name": "Joseph Chapman",
-        "email": "joe@creatify-limited.com",
-        "url": "http://creatify-limited.com"
-    },
-    "readmeFilename": "http://joechapman.github.io/asparagus/",
-    "homepage": "http://joechapman.github.io/asparagus/",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/JoeChapman/asparagus"
-    },
-    "bugs": {
-        "url": "https://github.com/JoeChapman/asparagus/issues"
-    },
-    "license": "MIT",
-    "bin": {
-        "asparagus": "bin/asparagus"
-    },
-    "scripts": {
-        "hooks": "chmod +x hooks/*; cd .git/hooks && ln -sf ../../hooks/* .",
-        "unit": "node ./node_modules/mocha/bin/mocha test/",
-        "lint": "node ./node_modules/jshint/bin/jshint ./",
-        "jscs": "node ./node_modules/jscs/bin/jscs ./",
-        "test": "npm run lint && npm run jscs && npm run unit"
-    },
-    "dependencies": {
-        "pecan": "0.0.2",
-        "bluebird": "2.3.2"
-    },
-    "devDependencies": {
-        "jshint": "2.5.5",
-        "jscs": "1.6.1",
-        "mocha": "1.21.4",
-        "chai": "1.9.1",
-        "chai-as-promised": "4.1.1",
-        "sinon": "1.10.3",
-        "sinon-chai": "2.5.0"
-    }
+  "name": "asparagus",
+  "version": "0.2.1",
+  "description": "Flexible template compiler. Compile all or some of your templates, even those in parallel sub-folders, to a location that may or may not yet exist.",
+  "keywords": [
+    "jade",
+    "template",
+    "node",
+    "build",
+    "tool",
+    "gulp",
+    "pecan",
+    "compile"
+  ],
+  "preferGlobal": true,
+  "author": {
+    "name": "Joseph Chapman",
+    "email": "joe@creatify-limited.com",
+    "url": "http://creatify-limited.com"
+  },
+  "readmeFilename": "http://joechapman.github.io/asparagus/",
+  "homepage": "http://joechapman.github.io/asparagus/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JoeChapman/asparagus"
+  },
+  "bugs": {
+    "url": "https://github.com/JoeChapman/asparagus/issues"
+  },
+  "license": "MIT",
+  "bin": {
+    "asparagus": "bin/asparagus"
+  },
+  "scripts": {
+    "hooks": "chmod +x hooks/*; cd .git/hooks && ln -sf ../../hooks/* .",
+    "unit": "node ./node_modules/mocha/bin/mocha test/",
+    "lint": "node ./node_modules/jshint/bin/jshint ./",
+    "jscs": "node ./node_modules/jscs/bin/jscs ./",
+    "test": "npm run lint && npm run jscs && npm run unit",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "dependencies": {
+    "pecan": "0.0.2",
+    "bluebird": "2.3.2",
+    "snyk": "^1.24.6"
+  },
+  "devDependencies": {
+    "jshint": "2.5.5",
+    "jscs": "1.6.1",
+    "mocha": "1.21.4",
+    "chai": "1.9.1",
+    "chai-as-promised": "4.1.1",
+    "sinon": "1.10.3",
+    "sinon-chai": "2.5.0"
+  },
+  "snyk": true
 }
